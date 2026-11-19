@@ -1,4 +1,3 @@
-
 baseURL = "https://David-tiao.github.io/my-blog/"
 languageCode = "zh-cn"
 title = "我的个人博客"
@@ -7,3 +6,24 @@ theme = "PaperMod"
 [params]
   author = "你的名字"
   description = "这是我的个人博客"
+  renderGroup = "melancholy-ocean"
+  defaultTheme = "dark"
+
+  [params.homeInfoParams]
+    Title = "在深蓝里，写下自己的潮汐"
+    Content = "这里收藏思考、技术与生活的微光。像海面一样安静，也像潮汐一样不断向前。"
+
+[[menu.main]]
+  name = "首页"
+  url = "/"
+  weight = 1
+
+[[menu.main]]
+  name = "文章"
+  url = "/posts/"
+  weight = 2
+
+[[menu.main]]
+  name = "标签"
+  url = "/tags/"
+  weight = 3
