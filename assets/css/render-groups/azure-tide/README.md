@@ -55,3 +55,14 @@ content/posts/_index.md     # Posts 栏目入口；真正文章由 Publisher 创
 GitHub Actions 每次运行前执行 `rm -rf public`，再执行 `hugo --minify`，保证旧网页不会因为构建缓存而残留。仓库的 `.gitignore` 已忽略 `public/`。
 
 旧文章已从当前分支移除；如果你以后想找回，可以通过 Git 历史恢复。思源笔记里的原始文档不受影响。
+
+## 首页人像海景背景（2026-11）
+
+首页现在采用用户提供的海边蓝调照片，已在上传前做了轻度柔焦与 WebP 压缩：
+
+- `static/images/site/hero-bg.webp`：首页背景图（轻微柔焦，约 8.6 KB）
+- `theme.css` 的最后一节 **Sea Portrait Edition / 海边暮蓝肖像**：专门管理照片背景、蓝色遮罩、文字配色与移动端裁切
+- 桌面端照片集中在首页右侧，左边使用深蓝半透明渐变保证可读性；手机端图片上方展示、文字在下方
+- 首页旧 SVG 海浪组件仍保留在 Hugo 布局文件中，但当前被 CSS 隐藏；未来切换回纯插画风格时可恢复
+
+照片只用于首页，不覆盖文章阅读区域。调整虚化程度，修改 `theme.css` 中的 `filter: blur(2px)`；调整人物位置，修改 `background-position`。如果将来替换照片，请替换相同路径文件，不需要修改思源笔记文章。
