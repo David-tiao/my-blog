@@ -1,0 +1,11 @@
+{{- /*
+Render-group loader. Change only params.renderGroup in hugo.toml to switch styles.
+CSS stays isolated in assets/css/render-groups/<group>/theme.css.
+This hook does not touch Markdown content or Publisher's publishing path.
+*/ -}}
+{{- $group := site.Params.renderGroup | default "melancholy-ocean" -}}
+{{- $path := printf "css/render-groups/%s/theme.css" $group -}}
+{{- with resources.Get $path -}}
+  {{- $style := . | resources.Minify | fingerprint -}}
+<link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}" crossorigin="anonymous">
+{{- end -}}
