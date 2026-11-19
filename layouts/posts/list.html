@@ -1,0 +1,39 @@
+{{ define "main" }}
+<header class="page-header">
+  <p class="tide-overline">WORDS IN PROGRESS · 文字正在生长</p>
+  <h1>文章小岛 <span class="tide-squiggle">〰</span></h1>
+  <p class="post-description">写下新的好奇，也收藏每一次发现。</p>
+</header>
+
+{{ $posts := .RegularPages }}
+{{ if gt (len $posts) 0 }}
+  {{ $paginator := .Paginate $posts }}
+  {{ range $paginator.Pages }}
+  <article class="post-entry">
+    {{ partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" (.Param "cover.hiddenInList" | default (.Param "cover.hidden") | default false)) }}
+    <header class="entry-header"><h2>{{ .Title }}</h2></header>
+    {{ if ne (.Param "hideSummary") true }}
+      <div class="entry-content"><p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}…{{ end }}</p></div>
+    {{ end }}
+    <footer class="entry-footer">{{ partial "post_meta.html" . }}</footer>
+    <a class="entry-link" href="{{ .Permalink }}" aria-label="阅读文章：{{ .Title }}"></a>
+  </article>
+  {{ end }}
+  {{ if gt $paginator.TotalPages 1 }}
+  <footer class="page-footer"><nav class="pagination">
+    {{ if $paginator.HasPrev }}<a class="prev" href="{{ $paginator.Prev.URL }}">« 上一页</a>{{ end }}
+    {{ if $paginator.HasNext }}<a class="next" href="{{ $paginator.Next.URL }}">下一页 »</a>{{ end }}
+  </nav></footer>
+  {{ end }}
+{{ else }}
+  <section class="tide-empty" aria-label="文章尚未发布">
+    <div class="tide-empty__content">
+      <span class="tide-empty__symbol" aria-hidden="true">◌</span>
+      <p class="tide-empty__kicker">A FRESH START / 重新启航</p>
+      <h2>故事，正在酝酿。</h2>
+      <p>这里暂时没有文章。海风已经吹来，下一篇值得认真写下的内容，也许就在不远处。</p>
+      <a class="tide-btn tide-btn--primary" href="{{ "" | relLangURL }}">回到首页 <span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+{{ end }}
+{{ end }}
