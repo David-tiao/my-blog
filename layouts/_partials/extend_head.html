@@ -9,3 +9,10 @@ This hook does not touch Markdown content or Publisher's publishing path.
   {{- $style := . | resources.Minify | fingerprint -}}
 <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}" crossorigin="anonymous">
 {{- end -}}
+
+{{- /* Optional second layer per render group (e.g. a full-site background). */ -}}
+{{- $extraPath := printf "css/render-groups/%s/fullsite-background.css" $group -}}
+{{- with resources.Get $extraPath -}}
+  {{- $extraStyle := . | resources.Minify | fingerprint -}}
+<link rel="stylesheet" href="{{ $extraStyle.RelPermalink }}" integrity="{{ $extraStyle.Data.Integrity }}" crossorigin="anonymous">
+{{- end -}}
