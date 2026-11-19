@@ -66,3 +66,14 @@ GitHub Actions 每次运行前执行 `rm -rf public`，再执行 `hugo --minify`
 - 首页旧 SVG 海浪组件仍保留在 Hugo 布局文件中，但当前被 CSS 隐藏；未来切换回纯插画风格时可恢复
 
 照片只用于首页，不覆盖文章阅读区域。调整虚化程度，修改 `theme.css` 中的 `filter: blur(2px)`；调整人物位置，修改 `background-position`。如果将来替换照片，请替换相同路径文件，不需要修改思源笔记文章。
+
+## 全站照片背景（2026-11-20）
+
+现在使用独立的 `fullsite-background.css` 控制整站大背景，入口位于 `layouts/_partials/extend_head.html`：该加载器会先加载 `theme.css`，再加载同目录的 `fullsite-background.css`，所以背景样式可以单独修改。
+
+- 背景适用于首页、文章列表和文章正文页，而不仅是首页 Hero。
+- 首页独立图片层已移除，整张照片由 `body::before` 固定铺满网页。
+- 没有 CSS 模糊滤镜；正文采用半透明浅色面板保证阅读可用性。
+- 当前仍使用仓库里的 `static/images/site/hero-fixed.webp`（此前压缩的素材）。若追求完全原图的最高画质，应另行上传原始高清图并修改 CSS 中的 `--tide-background-image`。
+- 修改背景位置使用 `body::before` 的 `background-position`；修改遮罩深度使用 `body::after`。
+- 文章仍由思源 Publisher 写入 `content/posts/`，与渲染文件隔离。
