@@ -1,0 +1,155 @@
+/*
+ * Azure Tide / full-site sea portrait overlay.
+ * This file overrides only presentation, never content/posts.
+ * Background is a normal non-blurred fixed image, not a blurred hero photo.
+ * Replace the asset URL to swap the sitewide background.
+ */
+:root, :root[data-theme="light"], :root[data-theme="dark"] {
+  --tide-background-image: url("/my-blog/images/site/hero-fixed.webp");
+  --tide-panel: rgba(242, 249, 255, .88);
+  --tide-panel-border: rgba(235, 246, 255, .40);
+  --tide-site-ink: #183e59;
+}
+html { min-height: 100%; background: #12355b; }
+body {
+  isolation: isolate;
+  position: relative;
+  min-height: 100vh;
+  background: #12355b;
+  color: #f1f8ff;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: var(--tide-background-image);
+  background-repeat: no-repeat;
+  background-position: center 43%;
+  background-size: cover;
+  /* No filter: keep the subject sharp. */
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(5, 21, 49, .16) 0%, rgba(5, 23, 55, .26) 72%, rgba(6, 21, 47, .35) 100%);
+}
+.header, .main, .footer, .top-link { position: relative; z-index: 1; }
+.header {
+  background: rgba(9, 32, 63, .70);
+  border-bottom: 1px solid rgba(230, 245, 255, .26);
+  -webkit-backdrop-filter: blur(9px);
+  backdrop-filter: blur(9px);
+}
+.header-nav a, .header-nav button, .logo a, .menu a, .menu .active {
+  color: #f3faff;
+}
+.logo a::before { color: #a8dbf6; }
+.menu a:hover, .header-nav a:hover { color: #b3e4ff; }
+.footer { color: #e9f6ff; border-color: rgba(231,245,255,.25); text-shadow: 0 1px 9px rgba(0,0,0,.3); }
+.footer a { color: #e9f6ff; }
+
+/* Let the portrait and sea show through the hero and around the modules. */
+.tide-hero {
+  display: flex;
+  position: relative;
+  isolation: isolate;
+  align-items: center;
+  min-height: 515px;
+  background: linear-gradient(92deg,
+    rgba(8, 30, 63, .86) 0%,
+    rgba(8, 30, 63, .76) 36%,
+    rgba(8, 30, 63, .35) 62%,
+    rgba(9, 30, 63, .08) 100%);
+  border: 1px solid rgba(229, 247, 255, .35);
+  box-shadow: 0 24px 55px rgba(4, 19, 44, .20);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+.tide-hero::before, .tide-hero::after, .tide-hero__photo, .tide-scene {
+  display: none !important;
+}
+.tide-hero__copy { position: relative; z-index: 1; max-width: 60%; padding-right: 8px; }
+.tide-hero h1 { color: #f7fbff; text-shadow: 0 2px 18px rgba(1, 12, 36, .3); }
+.tide-hero__lead { color: #edf7ff; text-shadow: 0 2px 8px rgba(0, 14, 39, .26); }
+.tide-hero__signature { color: #cde7fb; }
+.tide-kicker {
+  color: #e5f6ff;
+  background: rgba(26, 70, 114, .32);
+  border-color: rgba(209, 236, 255, .36);
+}
+.tide-btn--primary { background: #b8e1fc; color: #163e63 !important; }
+.tide-btn--soft {
+  color: #f5fbff !important;
+  border-color: rgba(232, 247, 255, .45);
+  background: rgba(45, 83, 128, .37);
+}
+
+/* Legible glass-like surfaces without blurring the background photograph. */
+.tide-sections__heading h2, .tide-overline, .tide-sections__aside,
+.page-header h1, .page-header .post-description {
+  color: #f5faff;
+  text-shadow: 0 2px 15px rgba(3, 22, 51, .6);
+}
+.tide-squiggle { color: #b8e9ff; }
+.tide-topic, .tide-topic--mint, .tide-topic--blue, .tide-topic--peach,
+.post-entry, .first-entry:not(.home-info), .tide-empty,
+.toc, .post-tags a, .paginav {
+  background: var(--tide-panel);
+  border: 1px solid var(--tide-panel-border);
+  box-shadow: 0 11px 34px rgba(9, 28, 52, .15);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+.tide-topic h3, .tide-topic p, .tide-topic__no,
+.post-entry h2, .post-entry .entry-content, .post-entry .entry-footer {
+  color: var(--tide-site-ink);
+}
+.tide-empty h2, .tide-empty p { color: var(--tide-site-ink); }
+.tide-topic:hover, .post-entry:hover { box-shadow: 0 18px 42px rgba(6, 26, 55, .22); }
+
+/* Keep Markdown articles readable, not printed directly over a portrait. */
+.post-single, .post-content, .archive-entry, .terms-tags a {
+  color: var(--tide-site-ink);
+}
+.post-single {
+  background: rgba(247, 251, 255, .94);
+  border: 1px solid rgba(246, 253, 255, .64);
+  border-radius: 22px;
+  padding: clamp(22px, 5vw, 48px);
+  box-shadow: 0 22px 60px rgba(4, 24, 52, .18);
+}
+.post-single .post-title, .post-single .post-content,
+.post-single .post-meta, .post-single .breadcrumbs, .post-single .post-footer {
+  color: var(--tide-site-ink);
+}
+.post-single .post-content a { color: #267caf; }
+.post-single .post-content blockquote { background: rgba(217, 238, 250, .7); }
+.post-single .post-content pre { background: #102d46; }
+.terms-tags a, .archive-entry { background: rgba(244,250,255,.89); border-radius: 12px; }
+.top-link { background: rgba(231,246,255,.90); }
+
+@media (max-width: 800px) {
+  body::before { background-position: 62% center; }
+  .tide-hero { min-height: 450px; }
+  .tide-hero__copy { max-width: 79%; }
+}
+@media (max-width: 600px) {
+  body::before { background-position: 65% center; }
+  body::after { background: linear-gradient(180deg,rgba(7,23,49,.23),rgba(7,23,49,.49)); }
+  .tide-hero {
+    min-height: 440px;
+    padding: 26px 23px;
+    background: linear-gradient(100deg,rgba(9,30,64,.83),rgba(9,30,64,.40));
+  }
+  .tide-hero__copy { max-width: 100%; }
+  .tide-hero h1 { font-size: clamp(32px, 8vw, 43px); }
+  .post-single { border-radius: 16px; padding: 22px 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tide-hero, .tide-topic, .post-entry { animation: none !important; }
+}
