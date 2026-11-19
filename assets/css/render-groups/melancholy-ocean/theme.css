@@ -1,0 +1,314 @@
+/*
+ * render-group: melancholy-ocean / 忧郁海蓝
+ * PaperMod visual layer only. No post markup or content is changed here.
+ * Palette: midnight indigo, deep water, sea fog and distant silver light.
+ * Motion: slow tides + soft entrance, with reduced-motion support.
+ */
+
+:root,
+:root[data-theme="dark"] {
+  --theme: #071827;
+  --entry: #10283b;
+  --primary: #e5edf4;
+  --secondary: #a3bac9;
+  --tertiary: #365c70;
+  --content: #cbdbe5;
+  --code-block-bg: #081522;
+  --code-bg: #102a3d;
+  --border: rgba(135, 180, 202, .22);
+  --radius: 18px;
+  --main-width: 860px;
+  --nav-width: 1120px;
+  --ocean-top: #071827;
+  --ocean-middle: #0b263b;
+  --ocean-bottom: #113249;
+  --ocean-haze: rgba(100, 157, 177, .13);
+  --ocean-glass: rgba(12, 35, 53, .72);
+  --ocean-highlight: #8fbdca;
+  --ocean-ink: #d7e7ef;
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --theme: #e0ebf0;
+  --entry: #f0f5f7;
+  --primary: #143149;
+  --secondary: #526f81;
+  --tertiary: #b2ccd5;
+  --content: #274557;
+  --code-block-bg: #152e41;
+  --code-bg: #d4e4e9;
+  --border: rgba(57, 103, 126, .2);
+  --ocean-top: #e7f0f3;
+  --ocean-middle: #cadce5;
+  --ocean-bottom: #a9cbd6;
+  --ocean-haze: rgba(61, 121, 151, .1);
+  --ocean-glass: rgba(237, 246, 248, .76);
+  --ocean-highlight: #416f88;
+  --ocean-ink: #143149;
+  color-scheme: light;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--theme);
+  background-image:
+    radial-gradient(ellipse 92% 43% at 80% 14%, var(--ocean-haze), transparent 70%),
+    radial-gradient(ellipse 70% 40% at 0% 68%, rgba(56, 122, 151, .09), transparent 80%),
+    linear-gradient(165deg, var(--ocean-top) 0%, var(--ocean-middle) 53%, var(--ocean-bottom) 100%);
+  background-attachment: fixed;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans CJK SC",
+    "PingFang SC", "Microsoft YaHei", sans-serif;
+  letter-spacing: .006em;
+}
+
+/* The distant, nearly imperceptible sea surface behind every page. */
+body::before {
+  content: "";
+  position: fixed;
+  z-index: 0;
+  pointer-events: none;
+  inset: 40% 0 0;
+  opacity: .28;
+  background:
+    repeating-radial-gradient(ellipse 100% 44% at 57% 105%,
+      transparent 0 24px,
+      rgba(145, 192, 205, .13) 25px 26px,
+      transparent 28px 50px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 45%, #000);
+  mask-image: linear-gradient(to bottom, transparent, #000 45%, #000);
+  animation: ocean-drift 22s ease-in-out infinite alternate;
+}
+
+.main,
+.footer { position: relative; z-index: 1; }
+
+.header {
+  position: relative;
+  z-index: 30;
+  background: var(--ocean-glass);
+  border-bottom: 1px solid var(--border);
+  -webkit-backdrop-filter: blur(17px);
+  backdrop-filter: blur(17px);
+}
+
+.logo a {
+  font-weight: 750;
+  letter-spacing: .025em;
+}
+
+.menu a,
+.logo a,
+.theme-toggle {
+  transition: color .25s ease, opacity .25s ease;
+}
+
+.menu a:hover,
+.logo a:hover,
+.theme-toggle:hover { color: var(--ocean-highlight); }
+
+.menu .active {
+  text-decoration-color: var(--ocean-highlight);
+  text-underline-offset: 7px;
+}
+
+.main { padding-top: clamp(24px, 4vw, 48px); }
+
+/*
+ * Homepage: a quiet sea at dusk, built only with gradients (no network
+ * images, JavaScript, fonts, or special content blocks required).
+ */
+.first-entry.home-info {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  justify-content: center;
+  min-height: clamp(300px, 38vw, 425px);
+  padding: clamp(32px, 6vw, 66px);
+  margin: 2px 0 36px;
+  border-radius: 26px;
+  border: 1px solid rgba(155, 205, 217, .23);
+  background:
+    radial-gradient(ellipse 55% 45% at 73% 17%, rgba(182, 214, 219, .18), transparent 74%),
+    linear-gradient(180deg, #10273e 0%, #14394d 48%, #071c30 49%, #061728 100%);
+  box-shadow: 0 24px 70px rgba(1, 10, 19, .27), inset 0 1px rgba(210, 230, 236, .1);
+}
+
+.first-entry.home-info::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  inset: 39% -24% -38% -20%;
+  opacity: .45;
+  background:
+    repeating-radial-gradient(ellipse 90% 30% at 53% 100%,
+      transparent 0 22px,
+      rgba(137, 204, 213, .22) 23px 24px,
+      transparent 25px 47px);
+  transform: rotate(-3deg);
+  animation: ocean-swell 16s ease-in-out infinite alternate;
+}
+
+.first-entry.home-info::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  inset: 0;
+  background:
+    linear-gradient(94deg, rgba(2, 15, 30, .52) 0%, transparent 72%),
+    radial-gradient(ellipse 58% 20% at 67% 50%, rgba(132, 193, 212, .11), transparent 90%);
+}
+
+.home-info .entry-header h1 {
+  max-width: 16em;
+  color: #ecf5f8;
+  font-size: clamp(30px, 4.6vw, 46px);
+  font-weight: 730;
+  letter-spacing: .045em;
+  line-height: 1.35;
+  text-shadow: 0 3px 24px rgba(3, 15, 28, .25);
+}
+
+.home-info .entry-content,
+.home-info .entry-content p {
+  color: #bed4df;
+  font-size: clamp(15px, 1.8vw, 17px);
+  line-height: 1.9;
+  max-width: 36em;
+}
+
+.home-info .social-icons a { color: #bdd8e4; }
+.home-info .social-icons a:hover { color: white; }
+
+/* Cards should suggest glass above deep water, not blue UI blocks. */
+.post-entry,
+.first-entry:not(.home-info) {
+  background: linear-gradient(145deg, var(--ocean-glass), var(--entry));
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(3, 17, 29, .10);
+  transition: transform .35s cubic-bezier(.2, .7, .2, 1),
+              box-shadow .35s ease,
+              border-color .35s ease;
+  animation: ocean-arrive .8s ease-out both;
+}
+
+.first-entry:not(.home-info) {
+  min-height: 245px;
+  padding: clamp(24px, 5vw, 40px);
+}
+
+.post-entry:hover,
+.post-entry:focus-within,
+.first-entry:not(.home-info):hover {
+  transform: translateY(-5px);
+  border-color: rgba(133, 195, 210, .52);
+  box-shadow: 0 20px 45px rgba(4, 16, 30, .2), 0 0 30px rgba(82, 141, 171, .07);
+}
+
+.entry-header h2 { font-weight: 670; letter-spacing: .012em; }
+.entry-content { line-height: 1.8; }
+.entry-footer, .post-meta { letter-spacing: .035em; }
+
+.post-header { margin-top: 30px; }
+.post-title {
+  font-size: clamp(30px, 4.2vw, 44px);
+  line-height: 1.25;
+  letter-spacing: .015em;
+}
+
+.post-content { line-height: 1.95; font-size: 17px; }
+.post-content h2,
+.post-content h3 { scroll-margin-top: 26px; }
+.post-content h2 {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: .45em;
+}
+.post-content a { color: var(--ocean-highlight); text-underline-offset: .22em; }
+.post-content blockquote {
+  background: var(--ocean-glass);
+  border-inline-start: 3px solid var(--ocean-highlight);
+  border-radius: 0 12px 12px 0;
+  padding: 1em 1.2em;
+}
+.post-content img {
+  border-radius: 15px;
+  box-shadow: 0 14px 40px rgba(2, 15, 28, .15);
+}
+
+.toc,
+.post-tags a,
+.paginav,
+.share-buttons,
+.pagination a {
+  border-radius: 14px;
+  border-color: var(--border);
+}
+.post-tags a:hover,
+.paginav a:hover { color: var(--ocean-highlight); }
+
+.footer {
+  color: var(--secondary);
+  border-top: 1px solid var(--border);
+  margin-top: 32px;
+}
+.top-link { background: var(--entry); border: 1px solid var(--border); }
+
+a:focus-visible,
+button:focus-visible,
+.entry-link:focus-visible {
+  outline: 2px solid var(--ocean-highlight);
+  outline-offset: 4px;
+}
+
+/* In light mode the general site becomes misty; the hero remains deep ocean. */
+:root[data-theme="light"] .post-entry,
+:root[data-theme="light"] .first-entry:not(.home-info) {
+  box-shadow: 0 8px 28px rgba(25, 66, 86, .08);
+}
+:root[data-theme="light"] .post-entry:hover {
+  box-shadow: 0 16px 40px rgba(25, 66, 86, .14);
+}
+
+@keyframes ocean-swell {
+  from { transform: translate3d(-1.2%, 0, 0) rotate(-3deg) scale(1); }
+  to   { transform: translate3d(1.2%, -3%, 0) rotate(-1deg) scale(1.045); }
+}
+@keyframes ocean-drift {
+  from { transform: translate3d(-1.5%, 0, 0); }
+  to   { transform: translate3d(1.5%, -2%, 0); }
+}
+@keyframes ocean-arrive {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@media (max-width: 680px) {
+  body { background-attachment: scroll; }
+  .main { padding-top: 20px; }
+  .first-entry.home-info {
+    min-height: 295px;
+    padding: 28px 24px;
+    border-radius: 18px;
+    margin-bottom: 24px;
+  }
+  .post-entry, .first-entry:not(.home-info) { border-radius: 15px; }
+  .post-entry:hover, .post-entry:focus-within { transform: none; }
+  .post-content { font-size: 16px; }
+  .header { -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  body::before, .first-entry.home-info::before,
+  .post-entry, .first-entry:not(.home-info) {
+    animation: none !important;
+    transition: none !important;
+  }
+  .post-entry:hover,
+  .post-entry:focus-within,
+  .first-entry:not(.home-info):hover { transform: none; }
+}
