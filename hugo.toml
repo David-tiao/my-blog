@@ -8,6 +8,7 @@ theme = "PaperMod"
   description = "技术、思考与生活的小小潮汐。"
   renderGroup = "azure-tide"
   defaultTheme = "light"
+  disableThemeToggle = true
   ShowReadingTime = true
   ShowPostNavLinks = true
   ShowBreadCrumbs = true
