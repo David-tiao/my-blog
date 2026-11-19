@@ -96,18 +96,19 @@ body::after {
   display: flex;
   align-items: center;
   min-height: 465px;
-  width: min(500px, 43vw);
+  width: min(440px, 38vw);
   max-width: 100%;
   margin-left: 0;
   margin-right: auto;
   padding: 34px clamp(23px, 3.2vw, 46px);
-  background: linear-gradient(94deg,
-    rgba(8, 30, 63, .78) 0%,
-    rgba(8, 30, 63, .68) 58%,
-    rgba(8, 30, 63, .41) 100%);
-  border: 1px solid rgba(229, 247, 255, .28);
-  border-radius: 28px;
-  box-shadow: 0 18px 50px rgba(3, 19, 47, .14);
+  background: linear-gradient(90deg,
+    rgba(8, 30, 63, .75) 0%,
+    rgba(8, 30, 63, .56) 68%,
+    rgba(8, 30, 63, 0) 100%);
+  /* No border, shadow or rounded panel edge may cross the portrait. */
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
 }
@@ -203,7 +204,7 @@ body::after {
    On wide screens, content sits on the left and the photo stays on the right. */
 @media (min-width: 761px) {
   .tide-sections {
-    width: min(500px, 43vw);
+    width: min(440px, 38vw);
     max-width: 100%;
     margin-left: 0;
     margin-right: auto;
@@ -272,3 +273,17 @@ body::after {
 @media (prefers-reduced-motion: reduce) {
   .tide-hero, .tide-topic, .post-entry { animation: none !important; }
 }
+
+/* Final portrait safety: remove any legacy border/pseudo decoration entirely.
+   The screenshot showed a visible rounded rectangle over the face. */
+.tide-hero,
+.tide-hero:hover,
+.tide-hero:focus-within {
+  border: 0 !important;
+  outline: 0;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  overflow: visible;
+}
+.tide-hero::before,
+.tide-hero::after { content: none !important; display: none !important; }
