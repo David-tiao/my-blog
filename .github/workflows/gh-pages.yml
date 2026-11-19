@@ -29,7 +29,11 @@ jobs:
 
       - uses: actions/configure-pages@v5
 
-      - run: hugo --minify
+      # Remove stale generated pages from earlier builds before rendering.
+      - name: Clean and build Hugo
+        run: |
+          rm -rf public
+          hugo --minify
 
       - uses: actions/upload-pages-artifact@v4
         with:
