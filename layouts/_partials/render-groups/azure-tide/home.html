@@ -1,0 +1,59 @@
+{{- /* Isolated home presentation for the azure-tide render group. */ -}}
+<section class="tide-hero" aria-labelledby="tide-home-title">
+  <div class="tide-hero__copy">
+    <div class="tide-kicker"><span class="tide-kicker__dot"></span> BLUE NOTES & OPEN HORIZONS</div>
+    <h1 id="tide-home-title">把灵感写成<span>浪花。</span></h1>
+    <p class="tide-hero__lead">一座靠近海的小小文字岛。收藏技术、生活与那些突然闪亮的想法，让每一次出发都有迹可循。</p>
+    <div class="tide-hero__actions">
+      <a class="tide-btn tide-btn--primary" href="{{ "posts/" | relLangURL }}">探索文章 <span aria-hidden="true">↗</span></a>
+      <a class="tide-btn tide-btn--soft" href="https://github.com/David-tiao/my-blog" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+    </div>
+    <p class="tide-hero__signature"><span>✳</span> Stay curious. Keep floating.</p>
+  </div>
+  <div class="tide-scene" aria-hidden="true">
+    <div class="tide-scene__halo"></div>
+    <div class="tide-scene__spark tide-scene__spark--a">✦</div>
+    <div class="tide-scene__spark tide-scene__spark--b">✧</div>
+    <div class="tide-scene__spark tide-scene__spark--c">✳</div>
+    <svg class="tide-scene__art" viewBox="0 0 620 520" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="tide-sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#c1edff"/><stop offset=".66" stop-color="#d7f7ff"/><stop offset="1" stop-color="#e9fbff"/></linearGradient>
+        <linearGradient id="tide-wave-back" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#96e2ed"/><stop offset="1" stop-color="#79bbda"/></linearGradient>
+        <linearGradient id="tide-wave-front" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#5fcbdd"/><stop offset=".55" stop-color="#58aed8"/><stop offset="1" stop-color="#397bad"/></linearGradient>
+        <linearGradient id="tide-sun" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff9db"/><stop offset="1" stop-color="#ffe8a0"/></linearGradient>
+        <clipPath id="tide-window"><rect width="568" height="446" x="27" y="36" rx="217"/></clipPath>
+      </defs>
+      <g clip-path="url(#tide-window)">
+        <rect x="27" y="36" width="568" height="446" fill="url(#tide-sky)"/>
+        <ellipse cx="358" cy="231" rx="129" ry="129" fill="#fff8dc" opacity=".22"/>
+        <circle class="tide-sun-disc" cx="358" cy="225" r="78" fill="url(#tide-sun)"/>
+        <path d="M27 299 C130 276 206 307 288 291 S481 265 595 294 L595 482 L27 482Z" fill="#a5e4ed" opacity=".85"/>
+        <path class="tide-wave tide-wave--far" d="M-50 338 C72 300 154 359 258 326 C370 292 453 349 661 308 L661 530 L-50 530Z" fill="url(#tide-wave-back)"/>
+        <path class="tide-wave tide-wave--middle" d="M-60 387 C90 343 173 404 290 371 C403 341 494 405 671 361 L671 520 L-60 520Z" fill="#83d9e5"/>
+        <path class="tide-wave tide-wave--near" d="M-90 428 C84 390 182 458 326 421 C453 387 519 442 682 402 L682 540 L-90 540Z" fill="url(#tide-wave-front)"/>
+        <path d="M66 360 Q167 343 252 362" fill="none" stroke="#e5fdff" stroke-width="5" stroke-linecap="round" opacity=".65"/>
+        <path d="M315 409 Q422 389 534 403" fill="none" stroke="#e1fbff" stroke-width="4" stroke-linecap="round" opacity=".55"/>
+        <path d="M121 446 Q211 428 277 443" fill="none" stroke="#e9fcff" stroke-width="4" stroke-linecap="round" opacity=".5"/>
+        <path d="M94 216 q17 -15 35 0 q18 -15 35 0" fill="none" stroke="#4292ae" stroke-width="4" stroke-linecap="round" opacity=".6"/>
+        <path d="M165 185 q13 -11 26 0 q13 -11 26 0" fill="none" stroke="#4292ae" stroke-width="3" stroke-linecap="round" opacity=".42"/>
+      </g>
+      <rect x="27" y="36" width="568" height="446" rx="217" fill="none" stroke="#ffffff" stroke-width="8" opacity=".6"/>
+    </svg>
+    <div class="tide-scene__label">SEA / 001 <span>↗</span></div>
+  </div>
+</section>
+
+<section class="tide-sections" aria-label="未来的写作方向">
+  <div class="tide-sections__heading">
+    <div>
+      <p class="tide-overline">A LITTLE OF EVERYTHING</p>
+      <h2>写作的三种波长<span class="tide-squiggle">〰</span></h2>
+    </div>
+    <span class="tide-sections__aside">思考，自由生长。</span>
+  </div>
+  <div class="tide-topics">
+    <div class="tide-topic tide-topic--mint"><span class="tide-topic__icon">✳</span><span class="tide-topic__no">01 / BUILD</span><h3>技术与实验</h3><p>把解决问题的过程，留给下一次灵光乍现。</p></div>
+    <div class="tide-topic tide-topic--blue"><span class="tide-topic__icon">◈</span><span class="tide-topic__no">02 / THINK</span><h3>思考与阅读</h3><p>读过的书、路过的念头，都值得一个小小的位置。</p></div>
+    <div class="tide-topic tide-topic--peach"><span class="tide-topic__icon">☼</span><span class="tide-topic__no">03 / LIVE</span><h3>生活与发现</h3><p>认真记录日常，也认真遇见世界的奇妙。</p></div>
+  </div>
+</section>
