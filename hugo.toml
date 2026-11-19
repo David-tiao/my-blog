@@ -1,17 +1,20 @@
 baseURL = "https://David-tiao.github.io/my-blog/"
 languageCode = "zh-cn"
-title = "我的个人博客"
+title = "潮汐手记"
 theme = "PaperMod"
 
 [params]
-  author = "你的名字"
-  description = "这是我的个人博客"
-  renderGroup = "melancholy-ocean"
-  defaultTheme = "dark"
+  author = "David"
+  description = "技术、思考与生活的小小潮汐。"
+  renderGroup = "azure-tide"
+  defaultTheme = "light"
+  ShowReadingTime = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
 
   [params.homeInfoParams]
-    Title = "在深蓝里，写下自己的潮汐"
-    Content = "这里收藏思考、技术与生活的微光。像海面一样安静，也像潮汐一样不断向前。"
+    Title = "把灵感写成浪花"
+    Content = "欢迎来到这座靠近海的文字小岛。"
 
 [[menu.main]]
   name = "首页"
