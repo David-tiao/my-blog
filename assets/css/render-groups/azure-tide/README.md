@@ -4,7 +4,7 @@
 
 ## 效果设计
 
-- 主色：奶白、海盐蓝、浅天青、薄荷青与少量暖阳黄
+- 主色：深海蓝、暮蓝、浅天青；正文阅读区仍保持浅色高对比度
 - 首页：自绘 SVG 海面与太阳，分层海浪轻微浮动
 - 设计组件：英雄区、胶囊导航按钮、三个不同色彩的写作方向卡片
 - 文章列表：卡片悬浮、阅读排版、聚焦态
@@ -56,24 +56,27 @@ GitHub Actions 每次运行前执行 `rm -rf public`，再执行 `hugo --minify`
 
 旧文章已从当前分支移除；如果你以后想找回，可以通过 Git 历史恢复。思源笔记里的原始文档不受影响。
 
-## 首页人像海景背景（2026-11）
+## 全站海边人像背景（2026-11-20）
 
-首页现在采用用户提供的海边蓝调照片，已在上传前做了轻度柔焦与 WebP 压缩：
+当前样式由两层组成：
 
-- `static/images/site/hero-bg.webp`：首页背景图（轻微柔焦，约 8.6 KB）
-- `theme.css` 的最后一节 **Sea Portrait Edition / 海边暮蓝肖像**：专门管理照片背景、蓝色遮罩、文字配色与移动端裁切
-- 桌面端照片集中在首页右侧，左边使用深蓝半透明渐变保证可读性；手机端图片上方展示、文字在下方
-- 首页旧 SVG 海浪组件仍保留在 Hugo 布局文件中，但当前被 CSS 隐藏；未来切换回纯插画风格时可恢复
+- `theme.css`：基础排版、按钮、卡片、动效及移动端基础样式。只保留一份基本 Hero 结构规则，不再包含过时的人物照片 Hero 覆盖层。
+- `fullsite-background.css`：唯一负责深蓝海洋背景、人物照片、首页布局及文章阅读面板的扩展层。它由 `extend_head.html` 在 `theme.css` 后加载。
 
-照片只用于首页，不覆盖文章阅读区域。调整虚化程度，修改 `theme.css` 中的 `filter: blur(2px)`；调整人物位置，修改 `background-position`。如果将来替换照片，请替换相同路径文件，不需要修改思源笔记文章。
+### 视觉布局
 
-## 全站照片背景（2026-11-20）
+- 桌面端：人物照片仍使用 `static/images/site/hero-fixed.webp`，保持 `contain` 比例与原始清晰度；只用 `mask-image` 渐隐边缘，不使用模糊、拉伸或硬裁切。
+- 首页介绍：透明 Hero 自然落在全站深蓝背景之上，没有独立的矩形深色面板。
+- 「写作的三种波长」：宽屏为三列卡片，较窄的平板为两列，手机端为一列；不再被限制到左侧 440px。
+- 手机端：首页先展示人像，再展示文字和分类。文章列表、正文页不会因首页照片预留空间而被推到下方。
+- 文章正文使用浅色高对比度阅读面板；背景属于视觉装饰，不侵入正文内容。
 
-现在使用独立的 `fullsite-background.css` 控制整站大背景，入口位于 `layouts/_partials/extend_head.html`：该加载器会先加载 `theme.css`，再加载同目录的 `fullsite-background.css`，所以背景样式可以单独修改。
+### 调整入口
 
-- 背景适用于首页、文章列表和文章正文页，而不仅是首页 Hero。
-- 首页独立图片层已移除，整张照片由 `body::before` 固定铺满网页。
-- 没有 CSS 模糊滤镜；正文采用半透明浅色面板保证阅读可用性。
-- 当前仍使用仓库里的 `static/images/site/hero-fixed.webp`（此前压缩的素材）。若追求完全原图的最高画质，应另行上传原始高清图并修改 CSS 中的 `--tide-background-image`。
-- 修改背景位置使用 `body::before` 的 `background-position`；修改遮罩深度使用 `body::after`。
-- 文章仍由思源 Publisher 写入 `content/posts/`，与渲染文件隔离。
+- 改人物图：替换 `static/images/site/hero-fixed.webp`，保持引用路径不变。
+- 改人物位置或画幅：调整 `fullsite-background.css` 的 `body::before`。
+- 改照片与海景的融合范围：调整 `body::before` 的 `mask-image` 径向渐变。
+- 改海洋底色：调整 `body, body.list` 的渐变背景。
+- 改首页内容宽度、卡片列数：调整 `.tide-hero`、`.tide-topics` 和相关媒体查询。
+
+不要在渲染组里存储文章：思源笔记 Publisher 仍将文章写入 `content/posts/`，这次仅修改视觉样式和文档，不修改发布流程。
