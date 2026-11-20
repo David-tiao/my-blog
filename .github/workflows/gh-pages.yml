@@ -39,5 +39,10 @@ jobs:
         with:
           path: ./public
 
+      # GitHub's artifact index can lag behind upload completion briefly.
+      # A fresh workflow run plus this pause avoids transient "0 artifacts" errors.
+      - name: Wait for Pages artifact availability
+        run: sleep 15
+
       - id: deployment
         uses: actions/deploy-pages@v4
