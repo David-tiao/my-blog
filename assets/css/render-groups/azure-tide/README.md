@@ -65,7 +65,7 @@ GitHub Actions 每次运行前执行 `rm -rf public`，再执行 `hugo --minify`
 
 ### 视觉布局
 
-- 桌面端：人物照片仍使用 `static/images/site/hero-fixed.webp`，保持 `contain` 比例与原始清晰度；只用 `mask-image` 渐隐边缘，不使用模糊、拉伸或硬裁切。
+- 桌面端：人物照片改用用户提供的原始高清 `static/images/site/hero-original.jpg`，保持 `contain` 比例与原始清晰度；只用 `mask-image` 渐隐边缘，不使用模糊、拉伸或硬裁切。
 - 首页介绍：透明 Hero 自然落在全站深蓝背景之上，没有独立的矩形深色面板。
 - 「写作的三种波长」：宽屏为三列卡片，较窄的平板为两列，手机端为一列；不再被限制到左侧 440px。
 - 手机端：首页先展示人像，再展示文字和分类。文章列表、正文页不会因首页照片预留空间而被推到下方。
@@ -73,7 +73,7 @@ GitHub Actions 每次运行前执行 `rm -rf public`，再执行 `hugo --minify`
 
 ### 调整入口
 
-- 改人物图：替换 `static/images/site/hero-fixed.webp`，保持引用路径不变。
+- 改人物图：替换 `static/images/site/hero-original.jpg`，保持引用路径不变。
 - 改人物位置或画幅：调整 `fullsite-background.css` 的 `body::before`。
 - 改照片与海景的融合范围：调整 `body::before` 的 `mask-image` 径向渐变。
 - 改海洋底色：调整 `body, body.list` 的渐变背景。

@@ -6,7 +6,7 @@
 :root,
 :root[data-theme="light"],
 :root[data-theme="dark"] {
-  --tide-photo: url("/my-blog/images/site/hero-fixed.webp");
+  --tide-photo: url("/my-blog/images/site/hero-original.jpg");
   --tide-panel: rgba(238, 247, 255, .94);
   --tide-panel-border: rgba(228, 243, 255, .68);
   --tide-ink: #173b59;
@@ -41,8 +41,8 @@ body::before {
   background: var(--tide-photo) center center / contain no-repeat;
   opacity: .98;
   filter: none;
-  -webkit-mask-image: radial-gradient(ellipse 64% 64% at 52% 48%, #000 41%, rgba(0,0,0,.98) 48%, transparent 74%);
-  mask-image: radial-gradient(ellipse 64% 64% at 52% 48%, #000 41%, rgba(0,0,0,.98) 48%, transparent 74%);
+  -webkit-mask-image: radial-gradient(ellipse 67% 67% at 53% 46%, #000 0%, #000 56%, rgba(0,0,0,.98) 63%, transparent 89%);
+  mask-image: radial-gradient(ellipse 67% 67% at 53% 46%, #000 0%, #000 56%, rgba(0,0,0,.98) 63%, transparent 89%);
 }
 
 /* The atmospheric veil covers the viewport, not a rectangular hero card. */
