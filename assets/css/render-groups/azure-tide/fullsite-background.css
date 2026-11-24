@@ -239,3 +239,66 @@ body::after {
   body, body.list { color: #111; background: #fff; }
   body::before, body::after { display: none; }
 }
+
+/* Responsive sea photo — desktop landscape, mobile portrait. */
+:root, :root[data-theme="light"], :root[data-theme="dark"] {
+  --tide-photo-landscape: url("/my-blog/images/site/hero-landscape.webp");
+  --tide-photo-portrait: url("/my-blog/images/site/hero-original.jpg");
+}
+
+/* The original portrait is a fallback while the landscape asset is absent. */
+body::before {
+  position: fixed;
+  inset: 0;
+  width: auto;
+  height: auto;
+  max-width: none;
+  transform: none;
+  opacity: 1;
+  background-image: var(--tide-photo-landscape), var(--tide-photo-portrait);
+  background-position: center center, center 44%;
+  background-size: cover, cover;
+  background-repeat: no-repeat;
+  -webkit-mask-image: none;
+  mask-image: none;
+  filter: none;
+}
+
+body::after {
+  background: linear-gradient(90deg, rgba(4, 17, 39, .58), rgba(4, 17, 39, .14) 65%, rgba(4, 17, 39, .12)),
+              linear-gradient(0deg, rgba(4, 17, 39, .24), transparent 65%);
+}
+
+/* Preserve the original reading panels and keep navigation above the photo. */
+.header, .main, .footer, .top-link { z-index: 1; }
+.terms-tags a, .archive-entry { color: var(--tide-ink); }
+.top-link { position: fixed; }
+
+@media (max-width: 760px), (orientation: portrait) and (max-width: 1100px) {
+  body::before, body:not(:has(.tide-hero))::before {
+    inset: 0;
+    width: auto;
+    height: auto;
+    max-width: none;
+    transform: none;
+    opacity: 1;
+    background-image: var(--tide-photo-portrait);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  body::after {
+    background: linear-gradient(180deg, rgba(4, 17, 39, .15), rgba(4, 17, 39, .12) 35%, rgba(4, 17, 39, .55));
+  }
+}
+@media (max-width: 760px) {
+  .main:has(> .tide-hero) { padding-top: clamp(320px, 58svh, 580px); }
+  .tide-hero__copy {
+    padding: 18px 14px;
+    border-radius: 16px;
+    background: rgba(5, 24, 48, .42);
+  }
+}
+@media print {
+  body::before, body::after { display: none; }
+}
